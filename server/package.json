@@ -5,7 +5,7 @@
     "main": "build/server.js",
     "scripts": {
         "build": "tsc",
-        "dev": "concurrently \"npx tsc --watch \" \"nodemon -L build/server.js\"",
+        "dev": "concurrently \"npx tsc --watch \" \"nodemon -q -L build/server.js\"",
         "test": "jest --watchAll --detectOpenHandles",
         "start": "npm run build && node build/server.js"
     },
