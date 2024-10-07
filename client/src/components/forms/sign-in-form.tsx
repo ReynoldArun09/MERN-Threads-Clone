@@ -10,12 +10,12 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { SigninSchemaType, SignupSchema } from "@/schemas/auth-schemas";
+import { SigninSchema, SigninSchemaType } from "@/schemas/auth-schemas";
 import { SignInMutation } from "@/services/mutations/auth-mutations";
 
 export default function SignInForm() {
   const form = useForm<SigninSchemaType>({
-    resolver: zodResolver(SignupSchema),
+    resolver: zodResolver(SigninSchema),
     defaultValues: { username: "", password: "" },
   });
   const { mutate: signIn, isPending } = SignInMutation();
