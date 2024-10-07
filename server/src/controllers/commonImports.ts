@@ -1,5 +1,5 @@
 import { ErrorMessages, SuccessMessages, HttpStatusCode } from "../constants";
-import { User } from "../models";
+import { User, Post, Reply } from "../models";
 import {
   ErrorLog,
   findUserByUsername,
@@ -7,8 +7,9 @@ import {
   SuccessLog,
   findUserByEmail,
   findUserById,
+  findPostById,
 } from "../helpers";
-import { AsyncHandler, AppError } from "../utils";
+import { AsyncHandler, AppError, isValidMongoId } from "../utils";
 
 export {
   ErrorMessages,
@@ -23,4 +24,8 @@ export {
   findUserByEmail,
   User,
   findUserById,
+  Post,
+  findPostById,
+  Reply,
+  isValidMongoId,
 };

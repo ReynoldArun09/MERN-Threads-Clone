@@ -1,4 +1,4 @@
-import { Logs, User } from "../models";
+import { Logs, User, Post } from "../models";
 import jwt from "jsonwebtoken";
 import { JwtPayloadExtendedType } from "../types/global";
 
@@ -50,4 +50,10 @@ export const ErrorLog = async (message: string, path: string) => {
     path,
   });
   await logEntry.save();
+};
+
+export const findPostById = async (id: string) => {
+  if (!id) return null;
+  const response = await Post.findById(id);
+  return response;
 };

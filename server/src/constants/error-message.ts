@@ -13,4 +13,13 @@ export const ErrorMessages = {
   INVALID_PASSWORD: "The password you entered is incorrect. Please try again.",
   USER_ALREADY_EXISTS:
     "An account with this email already exists. Please try using a different one.",
+  MONGO_ID_INVALID: "The MONGO ID you entered is invalid.",
+
+  //post error messages
+
+  POST_NOT_FOUND: "The post you’re looking for doesn’t exist.",
+  NOT_ALLOWED_TO_POST: "You are not allowed to create a post.",
+  NOT_ALLOWED_TO_DELETE: "You are not authorized to delete this post.",
+  FAILED_TO_UPDATE: "Unable to update the post. Please try again later.",
+  NOT_ALLOWED_TO_FOLLOW_YOURSELF: "You can't follow yourself.",
 };
