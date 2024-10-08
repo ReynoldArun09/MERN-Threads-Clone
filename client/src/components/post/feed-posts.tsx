@@ -33,7 +33,7 @@ export default function FeedPosts() {
   }
 
   return (
-    <section>
+    <section className="px-4">
       {data?.pages.map((page, pageIndex) => (
         <div key={pageIndex}>
           {page.data.map((post) => (
