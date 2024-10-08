@@ -51,3 +51,17 @@ export const UserProfileApi = async (
     }
   }
 };
+
+export const FreezeAccountApi = async (): Promise<ApiResponseType> => {
+  try {
+    const response = await axios.put("user/freeze", {});
+    return response.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      const message = error.response?.data.message || "An error occured";
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occured");
+    }
+  }
+};

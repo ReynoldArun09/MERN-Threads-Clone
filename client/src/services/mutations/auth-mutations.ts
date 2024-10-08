@@ -22,7 +22,7 @@ export function SignInMutation() {
 export function SignOutMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["sign-in"],
+    mutationKey: ["sign-out"],
     mutationFn: SignoutUserApi,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["verify-user"] });

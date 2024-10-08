@@ -74,9 +74,17 @@ export default function Post({ post }: PostProps) {
               )}
             </div>
           </div>
-          <h1 className="font-medium">{post.text}</h1>
+          <h1
+            className="font-medium pointer"
+            onClick={() => navigate(`/${user?.username}/post/${post._id}/`)}
+          >
+            {post.text}
+          </h1>
           {post.img && (
-            <div className="rounded-md overflow-hidden border-[1px] border-solid border-gray-300">
+            <div
+              className="rounded-md overflow-hidden border-[1px] border-solid border-gray-300"
+              onClick={() => navigate(`/${user?.username}/post/${post._id}/`)}
+            >
               <img src={post.img} alt={"image-missing"} />
             </div>
           )}
