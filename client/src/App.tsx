@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { VerifyUserQuery } from "./services/queries/auth-queries";
 import LoadingSpinner from "./components/common/loading-spinner";
+import RootLayout from "./layouts/root-layout";
 
 const AuthPage = lazy(() => import("./pages/auth-page"));
 const HomePage = lazy(() => import("./pages/home-page"));
@@ -21,42 +22,44 @@ export default function App() {
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
-      <Routes>
-        <Route
-          path="/"
-          element={isAuth ? <HomePage /> : <Navigate to="/auth" />}
-        />
-        <Route
-          path="/auth"
-          element={!isAuth ? <AuthPage /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/update"
-          element={isAuth ? <UpdateProfilePage /> : <Navigate to="/auth" />}
-        />
-        <Route path="/:username/post/:pid" element={<PostPage />} />
-        <Route
-          path="/chat"
-          element={isAuth ? <ChatPage /> : <Navigate to={"/auth"} />}
-        />
-        <Route
-          path="/settings"
-          element={isAuth ? <SettingPage /> : <Navigate to={"/auth"} />}
-        />
-        <Route
-          path="/:username"
-          element={
-            isAuth ? (
-              <>
+      <RootLayout>
+        <Routes>
+          <Route
+            path="/"
+            element={isAuth ? <HomePage /> : <Navigate to="/auth" />}
+          />
+          <Route
+            path="/auth"
+            element={!isAuth ? <AuthPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/update"
+            element={isAuth ? <UpdateProfilePage /> : <Navigate to="/auth" />}
+          />
+          <Route path="/:username/post/:pid" element={<PostPage />} />
+          <Route
+            path="/chat"
+            element={isAuth ? <ChatPage /> : <Navigate to={"/auth"} />}
+          />
+          <Route
+            path="/settings"
+            element={isAuth ? <SettingPage /> : <Navigate to={"/auth"} />}
+          />
+          <Route
+            path="/:username"
+            element={
+              isAuth ? (
+                <>
+                  <UserPage />
+                  <CreatePost />
+                </>
+              ) : (
                 <UserPage />
-                <CreatePost />
-              </>
-            ) : (
-              <UserPage />
-            )
-          }
-        />
-      </Routes>
+              )
+            }
+          />
+        </Routes>
+      </RootLayout>
     </Suspense>
   );
 }

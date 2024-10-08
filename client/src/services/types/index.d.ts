@@ -27,3 +27,14 @@ export type ApiResponseType = {
   success: boolean;
   message: string;
 };
+
+export type PostResponseType = {
+  _id: string;
+  postedById: string;
+  text: string;
+  img: string;
+  replies: RepliesType[];
+  createdAt: Date;
+  updatedAt: Date;
+  likes: [];
+};
