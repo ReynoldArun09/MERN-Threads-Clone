@@ -97,3 +97,17 @@ export const LikeAndUnlikePostApi = async (id: string) => {
     }
   }
 };
+
+export const SinglePostApi = async (id: string): Promise<PostResponseType> => {
+  try {
+    const response = await axios.get(`post/${id}`);
+    return response.data.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      const message = error.response?.data.message || "An error occured";
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occured");
+    }
+  }
+};

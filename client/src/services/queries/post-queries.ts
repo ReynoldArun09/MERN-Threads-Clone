@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { FeedPostApi, UserPostApi } from "../apis/post.api";
+import { FeedPostApi, SinglePostApi, UserPostApi } from "../apis/post.api";
 
 export function GetFeedPostsQuery() {
   return useInfiniteQuery({
@@ -23,6 +23,19 @@ export function GetUserPostsQuery(username: string) {
         return null;
       } else {
         return await UserPostApi(username);
+      }
+    },
+  });
+}
+
+export function GetCurrentPost(id: string) {
+  return useQuery({
+    queryKey: ["single-post", id],
+    queryFn: async () => {
+      if (!id) {
+        return null;
+      } else {
+        return await SinglePostApi(id);
       }
     },
   });

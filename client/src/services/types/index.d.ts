@@ -44,3 +44,13 @@ export type PostSchemaExtendedType = {
   image?: string;
   postedById: string;
 };
+
+export type RepliesType = {
+  _id: string;
+  text: string;
+  userId: string;
+  username: string;
+  createdAt: Date;
+  updatedAt: Date;
+  profilePic: string;
+};
