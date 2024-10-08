@@ -1,10 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { FeedPostApi, UserPostApi } from "../apis/post.api";
 
 export function GetFeedPostsQuery() {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["feed-posts"],
     queryFn: FeedPostApi,
+    getNextPageParam: (lastPage, allPages) => {
+      const totalFetched = allPages.length * 10; // 10 is our limit
+      return lastPage.totalPosts && totalFetched < lastPage.totalPosts
+        ? allPages.length
+        : undefined;
+    },
+    initialPageParam: 0,
   });
 }
 

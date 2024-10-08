@@ -38,3 +38,9 @@ export type PostResponseType = {
   updatedAt: Date;
   likes: [];
 };
+
+export type PostSchemaExtendedType = {
+  text: string;
+  image?: string;
+  postedById: string;
+};
