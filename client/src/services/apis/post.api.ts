@@ -14,3 +14,19 @@ export const FeedPostApi = async (): Promise<PostResponseType[] | []> => {
     }
   }
 };
+
+export const UserPostApi = async (
+  username: string
+): Promise<PostResponseType[]> => {
+  try {
+    const response = await axios.get(`post/user/${username}`);
+    return response.data.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      const message = error.response?.data.message || "An error occured";
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occured");
+    }
+  }
+};
