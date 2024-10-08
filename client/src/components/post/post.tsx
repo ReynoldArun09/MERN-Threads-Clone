@@ -43,11 +43,24 @@ export default function Post({ post }: PostProps) {
           <div className="w-[1px] h-full bg-gray-300 my-2"></div>
           <div className="relative w-full">
             {post?.replies?.length === 0 && <h1 className="text-center">🥱</h1>}
-            {post?.replies[0] && <Avatar />}
-
-            {post?.replies[1] && <Avatar />}
-
-            {post?.replies[2] && <Avatar />}
+            {post?.replies[0] && (
+              <Avatar>
+                <AvatarImage src={post?.replies[0]?.profilePic} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            )}
+            {post?.replies[1] && (
+              <Avatar>
+                <AvatarImage src={post?.replies[0]?.profilePic} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            )}
+            {post?.replies[2] && (
+              <Avatar>
+                <AvatarImage src={post?.replies[0]?.profilePic} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            )}
           </div>
         </div>
 
@@ -55,7 +68,7 @@ export default function Post({ post }: PostProps) {
           <div className="flex justify-between w-full">
             <div className="w-full items-center flex">
               <h1
-                className="text-sm font-bold"
+                className="text-sm font-bold pointer hover:underline "
                 onClick={(e) => {
                   e.preventDefault();
                   navigate(`/${user?.username}`);
@@ -75,7 +88,7 @@ export default function Post({ post }: PostProps) {
             </div>
           </div>
           <h1
-            className="font-medium pointer"
+            className="font-medium pointer py-4"
             onClick={() => navigate(`/${user?.username}/post/${post._id}/`)}
           >
             {post.text}

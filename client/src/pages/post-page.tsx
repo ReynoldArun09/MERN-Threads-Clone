@@ -1,7 +1,6 @@
 import ActionsButton from "@/components/common/actions-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { TrashIcon } from "@radix-ui/react-icons";
 import { Separator } from "@/components/ui/separator";
 import Comment from "@/components/post/comment";
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +10,7 @@ import { GetUserProfileQuery } from "@/services/queries/user-queries";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingSpinner from "@/components/common/loading-spinner";
 import { GetCurrentPost } from "@/services/queries/post-queries";
+import { AiFillDelete } from "react-icons/ai";
 
 export default function PostPage() {
   const { username, pid } = useParams<{ username: string; pid: string }>();
@@ -56,7 +56,8 @@ export default function PostPage() {
         </div>
         <div className="flex gap-4 items-center">
           {authUser?.id === user?._id && (
-            <TrashIcon
+            <AiFillDelete
+              size={20}
               cursor={"pointer"}
               onClick={handleDeletePost}
               className="h-6 w-6"

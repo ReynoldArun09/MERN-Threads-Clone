@@ -1,6 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { FollowAndUnfollowUserApi, FreezeAccountApi } from "../apis/user-api";
+import {
+  FollowAndUnfollowUserApi,
+  FreezeAccountApi,
+  UpdateUserProfileApi,
+} from "../apis/user-api";
 
 export function FollowAndUnFollowMutation() {
   const queryClient = useQueryClient();
@@ -21,5 +25,12 @@ export function UserAccountFreezeMutation() {
     onSuccess: async (data) => {
       toast.success(data.message);
     },
+  });
+}
+
+export function UpdateUserPofileMutation() {
+  return useMutation({
+    mutationKey: ["update-profile"],
+    mutationFn: UpdateUserProfileApi,
   });
 }

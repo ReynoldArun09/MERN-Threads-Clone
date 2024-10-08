@@ -30,8 +30,8 @@ export default function ActionsButton({ post }: ActionsButtonProps) {
     <section className="flex flex-col space-y-3">
       <div className="flex gap-5 my-2 cursor-pointer">
         <LikeSVG handleLikAndUnlike={handleLikAndUnlike} />
-        <RepostSVG />
         <CommentSVG open={open} setOpen={setOpen} />
+        <RepostSVG />
         <ShareSVG />
       </div>
       <div className="flex items-center gap-2">

@@ -4,6 +4,7 @@ import {
   SuggestedUserResponseType,
   UserResponseType,
 } from "../types";
+import { ProfileSchemaType } from "@/schemas/update-user-Schemas";
 
 export const SuggestedUsersApi =
   async (): Promise<SuggestedUserResponseType> => {
@@ -56,6 +57,26 @@ export const FreezeAccountApi = async (): Promise<ApiResponseType> => {
   try {
     const response = await axios.put("user/freeze", {});
     return response.data;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      const message = error.response?.data.message || "An error occured";
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occured");
+    }
+  }
+};
+
+export const UpdateUserProfileApi = async ({
+  id,
+  values,
+}: {
+  id: string;
+  values: ProfileSchemaType;
+}) => {
+  try {
+    const response = await axios.put(`user/update/${id}`, values);
+    return response.data.data;
   } catch (error) {
     if (isAxiosError(error)) {
       const message = error.response?.data.message || "An error occured";

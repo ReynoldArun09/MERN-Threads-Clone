@@ -64,7 +64,6 @@ export default function UserHeader() {
           <Button size={"lg"}>Update Profile</Button>
         </Link>
       )}
-      {authUser?.id !== userInfo?._id && <Button>{"Follow"}</Button>}
       <h1>{userInfo?.bio}</h1>
       <div className="flex w-full justify-between">
         <div className="flex gap-2 items-center">
@@ -93,14 +92,14 @@ export default function UserHeader() {
           </div>
         </div>
       </div>
-      <div className="flex w-full">
-        <div className="flex flex-1 pb-3 border-b-[1.5px] border-b-solid border-b-white justify-center cursor-pointer">
-          <h1 className="text-bold">Threads</h1>
+      {authUser?.id !== userInfo?._id && (
+        <div className="flex w-full gap-4 items-center">
+          <Button className="w-full">{"Follow"}</Button>
+          <Button className="w-full" variant={"secondary"}>
+            {"Mention"}
+          </Button>
         </div>
-        <div className="flex flex-1 pb-3 border-b-[1.5px] border-b-solid text-gray-500 border-b-white justify-center cursor-pointer">
-          <h1 className="font-bold">Replies</h1>
-        </div>
-      </div>
+      )}
     </section>
   );
 }
