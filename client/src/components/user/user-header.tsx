@@ -15,6 +15,7 @@ import { GetUserProfileQuery } from "@/services/queries/user-queries";
 import { UserDataType } from "@/services/types";
 import LoadingSpinner from "../common/loading-spinner";
 import { Badge } from "../ui/badge";
+import { toast } from "sonner";
 
 export default function UserHeader() {
   const { username } = useParams<{ username: string }>();
@@ -32,6 +33,13 @@ export default function UserHeader() {
     return <h1>User not found</h1>;
   }
 
+  const copyURL = () => {
+    const currentURL = window.location.href;
+    navigator.clipboard.writeText(currentURL).then(() => {
+      toast.success("URL copied to clipboard!");
+    });
+  };
+
   return (
     <section className="flex flex-col gap-4 items-start mt-6">
       <div className="flex justify-between w-full">
@@ -45,14 +53,14 @@ export default function UserHeader() {
           </div>
         </div>
         <div>
-          {userInfo?.profilePic && (
-            <Avatar>
-              <AvatarImage src={userInfo?.profilePic} />
+          {userInfo?.profilePicture && (
+            <Avatar className="w-24 h-24">
+              <AvatarImage src={userInfo?.profilePicture} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           )}
-          {!userInfo?.profilePic && (
-            <Avatar>
+          {!userInfo?.profilePicture && (
+            <Avatar className="w-24 h-24">
               <AvatarImage src="https://bit.ly/broken-link" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -70,7 +78,7 @@ export default function UserHeader() {
           <h1>{userInfo?.followers.length} followers</h1>
           <div className="w-[1px] h-[1px] bg-gray-300 rounded"></div>
           <Link to={"/"} className="text-gray-500 underline">
-            instagram.com
+            {authUser?.website}
           </Link>
         </div>
         <div className="flex gap-5 items-center">
@@ -85,7 +93,7 @@ export default function UserHeader() {
                   <CgMoreO size={18} />
                 </MenubarTrigger>
                 <MenubarContent>
-                  <MenubarItem>Copy Link</MenubarItem>
+                  <MenubarItem onClick={copyURL}>Copy Link</MenubarItem>
                 </MenubarContent>
               </MenubarMenu>
             </Menubar>

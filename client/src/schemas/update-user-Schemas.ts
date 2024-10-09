@@ -10,7 +10,8 @@ export const UpdateProfileSchema = z.object({
     .optional(),
   bio: z.string().optional(),
   password: z.string().optional().nullable(),
-  profilePic: z.string().optional(),
+  profilePicture: z.string().optional(),
+  website: z.string().optional(),
 });
 
 export type ProfileSchemaType = z.infer<typeof UpdateProfileSchema>;

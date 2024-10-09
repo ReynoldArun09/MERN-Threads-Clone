@@ -8,10 +8,11 @@ interface IUser extends Document {
   role: string;
   googleId: string;
   profilePicture: string;
-  followers: mongoose.Types.ObjectId[];
-  following: mongoose.Types.ObjectId[];
+  followers: string[];
+  following: string[];
   bio: string;
   isFrozen: boolean;
+  website: string;
 }
 
 interface ILogs extends Document {

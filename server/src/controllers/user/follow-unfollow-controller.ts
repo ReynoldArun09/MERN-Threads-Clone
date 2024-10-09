@@ -28,6 +28,13 @@ export const FollowUnFollowUserApi = AsyncHandler(
       );
     }
 
+    if (loggedInUser === userToFollow) {
+      throw new AppError(
+        ErrorMessages.NOT_ALLOWED_TO_FOLLOW_YOURSELF,
+        HttpStatusCode.BAD_REQUEST
+      );
+    }
+
     const isFollowing = verifyLoggedUser.following.includes(userToFollow);
 
     if (isFollowing) {

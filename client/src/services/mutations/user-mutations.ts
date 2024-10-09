@@ -14,6 +14,7 @@ export function FollowAndUnFollowMutation() {
     onSuccess: async (data) => {
       toast.success(data.message);
       await queryClient.invalidateQueries({ queryKey: ["suggested-users"] });
+      await queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
     },
   });
 }

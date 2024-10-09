@@ -33,11 +33,21 @@ const userSchema = new mongoose.Schema<IUser>(
       type: String,
       default: "",
     },
-    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    followers: {
+      type: [String],
+      default: [],
+    },
+    following: {
+      type: [String],
+      default: [],
+    },
     bio: {
       type: String,
       default: "",
+    },
+    website: {
+      type: String,
+      default: "www.instagram.com",
     },
     isFrozen: {
       type: Boolean,

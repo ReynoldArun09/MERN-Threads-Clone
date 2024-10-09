@@ -31,4 +31,6 @@ export type JwtPayloadExtendedType = {
   id: string;
   bio: string;
   profilePicture: string;
+  name: string;
+  website: string;
 };

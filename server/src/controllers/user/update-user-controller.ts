@@ -13,7 +13,7 @@ import cloudinary from "../../config/cloudinary";
 
 export const UpdateUserProfileApi = AsyncHandler(
   async (req: Request, res: Response) => {
-    const { username, name, bio, email, password } = req.body;
+    const { username, name, bio, email, password, website } = req.body;
     let { profilePicture } = req.body;
     const loggedInUser = isValidMongoId(req.user.id);
 
@@ -61,8 +61,9 @@ export const UpdateUserProfileApi = AsyncHandler(
         name: name || existingUser.name,
         email: email || existingUser.email,
         bio: bio || existingUser.bio,
-        profilePic: updatedProfilePic || existingUser.profilePicture,
+        profilePicture: updatedProfilePic || existingUser.profilePicture,
         password: hashPassword || existingUser.password,
+        website: website || existingUser.website,
       },
       {
         new: true,

@@ -5,6 +5,7 @@ export type UserDataType = {
   name: string;
   bio: string;
   profilePicture: string;
+  website: string;
 };
 
 export type UserResponseType = {
@@ -12,7 +13,7 @@ export type UserResponseType = {
   name: string;
   username: string;
   email: string;
-  profilePic: string;
+  profilePicture: string;
   followers: [];
   following: [];
   bio: string;
@@ -52,5 +53,5 @@ export type RepliesType = {
   username: string;
   createdAt: Date;
   updatedAt: Date;
-  profilePic: string;
+  profilePicture: string;
 };

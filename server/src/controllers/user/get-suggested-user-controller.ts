@@ -9,19 +9,19 @@ import { Request, Response } from "express";
 
 export const GetSuggestedUsersApi = AsyncHandler(
   async (req: Request, res: Response) => {
-    const loggedInUser = isValidMongoId(req.user.id);
+    const loggedInUserId = req.user.id;
 
-    const alreadyFollowedUsers = await User.findById(loggedInUser).select(
+    const alreadyFollowedUsers = await User.findById(loggedInUserId).select(
       "following"
     );
 
-    const convertTOObjectid = new mongoose.Types.ObjectId(loggedInUser);
+    const loggedInUserObjectId = new mongoose.Types.ObjectId(loggedInUserId);
 
     const users = await User.aggregate([
       {
         $match: {
           _id: {
-            $ne: convertTOObjectid,
+            $ne: loggedInUserObjectId,
           },
         },
       },
@@ -30,13 +30,15 @@ export const GetSuggestedUsersApi = AsyncHandler(
       },
     ]);
 
-    const filteredUsers = users.filter((user) => {
-      return !alreadyFollowedUsers?.following[user._id.toString()];
-    });
+    const filteredUsers = users.filter(
+      (user) => !alreadyFollowedUsers?.following.includes(user._id.toString())
+    );
+
+    const suggestedUsersList = filteredUsers.slice(0, 4);
 
     res.status(HttpStatusCode.OK).json({
       success: true,
-      data: filteredUsers,
+      data: suggestedUsersList,
     });
   }
 );

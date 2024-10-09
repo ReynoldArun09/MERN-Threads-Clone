@@ -17,7 +17,7 @@ import { UpdateUserPofileMutation } from "@/services/mutations/user-mutations";
 
 export default function UpdateProfileForm() {
   const { data: authUser } = useQuery<UserDataType>({
-    queryKey: ["verify"],
+    queryKey: ["verify-user"],
   });
   const navigate = useNavigate();
   const imageRef = useRef<HTMLInputElement | null>(null);
@@ -26,11 +26,12 @@ export default function UpdateProfileForm() {
     resolver: zodResolver(UpdateProfileSchema),
     defaultValues: {
       username: authUser?.username,
-      name: "",
+      name: authUser?.name || "",
       email: authUser?.email,
-      bio: "",
+      bio: authUser?.bio,
       password: "",
-      profilePic: "",
+      profilePicture: authUser?.profilePicture,
+      website: authUser?.website || "",
     },
   });
 
@@ -51,7 +52,8 @@ export default function UpdateProfileForm() {
       email: values.email || authUser.email,
       bio: values.bio || "",
       password: values.password || "",
-      profilePic: imageUrl || "",
+      profilePicture: imageUrl || "",
+      website: values.website || "",
     };
     mutate({ id: authUser.id, values: data });
     setImageUrl("");
@@ -68,7 +70,7 @@ export default function UpdateProfileForm() {
           </Avatar>
 
           <FormField
-            name="profilePic"
+            name="profilePicture"
             render={() => (
               <FormItem>
                 <FormControl>
@@ -148,6 +150,17 @@ export default function UpdateProfileForm() {
                 <FormLabel>Bio</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter your Bio" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="website"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Add your website</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your link here" {...field} />
                 </FormControl>
               </FormItem>
             )}

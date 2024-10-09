@@ -45,6 +45,8 @@ export const SignInUserApi = AsyncHandler(
       id: existingUser.id,
       bio: existingUser.bio,
       profilePicture: existingUser.profilePicture,
+      name: existingUser.name,
+      website: existingUser.website,
     });
 
     await SuccessLog(SuccessMessages.SIGNIN_SUCCESS, req.originalUrl);
@@ -66,6 +68,7 @@ export const SignInUserApi = AsyncHandler(
           bio: existingUser.bio,
           profilePicture: existingUser.profilePicture,
           name: existingUser.name,
+          website: existingUser.website,
         },
       });
   }

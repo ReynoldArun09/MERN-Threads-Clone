@@ -4,6 +4,11 @@ import SuggestedUser from "./suggested-user";
 
 export default function SuggestedUsers() {
   const { data: suggestedUsers, isLoading } = GetSuggestedUsersQuery();
+
+  if (!isLoading && suggestedUsers?.length === 0) {
+    return null;
+  }
+
   return (
     <section>
       <h1 className="mb-4 font-bold">SuggestedUsers</h1>

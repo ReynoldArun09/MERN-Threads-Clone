@@ -12,14 +12,23 @@ import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { SignupSchema, SignupSchemaType } from "@/schemas/auth-schemas";
 import { SignUpMutation } from "@/services/mutations/auth-mutations";
+import useAuthState from "@/hooks/useAuthState";
 
 export default function SignUpForm() {
+  const { ToggleAuthState } = useAuthState();
   const form = useForm<SignupSchemaType>({
     resolver: zodResolver(SignupSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      name: "",
+      password: "",
+    },
   });
   const { mutate: signUp, isPending } = SignUpMutation();
   const onSubmit = (values: SignupSchemaType) => {
     signUp(values);
+    ToggleAuthState("sign-in");
   };
 
   return (

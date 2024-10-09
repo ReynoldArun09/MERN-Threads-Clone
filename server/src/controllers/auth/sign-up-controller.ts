@@ -30,7 +30,7 @@ export const SignUpUserApi = AsyncHandler(
 
     const newUser = await User.create({
       username,
-      name,
+      name: name.trim().toLowerCase(),
       email,
       password: hashPassword,
     });

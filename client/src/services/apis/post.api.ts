@@ -11,7 +11,7 @@ export const FeedPostApi = async ({ pageParam = 0 }): Promise<PostResponse> => {
   const limit = 5;
   try {
     const response = await axios.get(
-      `post/all/feeds?limit=${limit}&offset=${pageParam}`
+      `post/all/feeds?limit=${limit}&offset=${pageParam * 10}`
     );
     return response.data;
   } catch (error) {

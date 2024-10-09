@@ -28,6 +28,8 @@ export const generateJwtToken = (user: JwtPayloadExtendedType) => {
       id: user.id,
       bio: user.bio,
       profilePicture: user.profilePicture,
+      name: user.name,
+      website: user.website,
     },
     process.env.JWT_SECRET_KEY,
     { expiresIn: process.env.JWT_EXPIRE_TIME }
