@@ -41,7 +41,7 @@ export default function UserHeader() {
   };
 
   return (
-    <section className="flex flex-col gap-4 items-start mt-6">
+    <section className="flex flex-col gap-4 items-start mt-8">
       <div className="flex justify-between w-full">
         <div>
           <h1 className="text-2xl font-bold">{userInfo?.username}</h1>

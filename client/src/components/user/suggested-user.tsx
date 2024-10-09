@@ -12,10 +12,10 @@ export default function SuggestedUser({ user }: SuggestedUserProps) {
   const { isPending, mutate: handleFollow } = FollowAndUnFollowMutation();
 
   return (
-    <section className="flex gap-2 justify-between items-center">
+    <section className="flex gap-4 justify-between w-[120px] items-center">
       <Link to={`${user.username}`} className="flex gap-2">
         <Avatar>
-          <AvatarImage src={user.profilePic} alt={user.username} />
+          <AvatarImage src={user.profilePicture} alt={user.username} />
           <AvatarFallback>{user.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         <div>

@@ -8,6 +8,8 @@ import { formatDistanceToNow } from "date-fns";
 import { GetUserProfileQuery } from "@/services/queries/user-queries";
 import { DeletePostMutation } from "@/services/mutations/post-mutations";
 import { Card } from "../ui/card";
+import { AiOutlineEllipsis } from "react-icons/ai";
+import { Button } from "../ui/button";
 
 interface PostProps {
   post: PostResponseType;
@@ -28,74 +30,65 @@ export default function Post({ post }: PostProps) {
   };
 
   return (
-    <Card className="px-4 rounded-sm">
-      <div className="flex gap-3 mb-4 py-5">
-        <div className="flex flex-col items-center">
-          <Avatar
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`/${user?.username}`);
-            }}
-          >
-            <AvatarImage src={user?.profilePic} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="w-[1px] h-full bg-gray-300 my-2"></div>
-          <div className="relative w-full">
-            {post?.replies?.length === 0 && <h1 className="text-center">🥱</h1>}
-            {post?.replies[0] && (
-              <Avatar>
-                <AvatarImage src={post?.replies[0]?.profilePic} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            )}
-            {post?.replies[1] && (
-              <Avatar>
-                <AvatarImage src={post?.replies[0]?.profilePic} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            )}
-            {post?.replies[2] && (
-              <Avatar>
-                <AvatarImage src={post?.replies[0]?.profilePic} />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            )}
+    <Card className="grid bg-secondary rounded-none px-6 pb-2 pt-4 border-b-1 border-b-gray-300 dark:border-b-gray-700">
+      <div className="col-start-1 row-start-1 col-span-1">
+        <Avatar
+          className="w-12 h-12"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(`/${user?.username}`);
+          }}
+        >
+          <AvatarImage
+            src={
+              user?.profilePicture
+                ? user?.profilePicture
+                : "https://bit.ly/dan-abramov"
+            }
+          />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </div>
+      <div className="col-start-2 row-start-1 col-span-11">
+        <div className="flex justify-between">
+          <div className="flex items-center gap-2">
+            <h1
+              className="text-sm font-bold pointer hover:underline "
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/${user?.username}`);
+              }}
+            >
+              {user?.username}
+            </h1>
+            <img src="/verified.png" alt="img" className="w-4 h-4" />
+            <h2 className="font-medium w-[200px] text-gray-500">
+              {formatDistanceToNow(new Date(post.createdAt))}
+            </h2>
           </div>
-        </div>
-
-        <div className="flex flex-1 flex-col gap-2">
-          <div className="flex justify-between w-full">
-            <div className="w-full items-center flex">
-              <h1
-                className="text-sm font-bold pointer hover:underline "
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate(`/${user?.username}`);
-                }}
-              >
-                {user?.username}
-              </h1>
-              <img src="/verified.png" alt="img" className="w-4 h-4 ml-1" />
-            </div>
-            <div className="flex gap-4 items-center">
-              <h1 className="font-medium w-[200px] text-right text-gray-500">
-                {formatDistanceToNow(new Date(post.createdAt))}
-              </h1>
+          <div className="flex gap-2 items-center">
+            <div>
               {authUser?.id === user?._id && (
                 <AiFillDelete size={20} onClick={handleDeletePost} />
               )}
             </div>
+            <Button variant={"secondary"}>
+              <AiOutlineEllipsis size={20} />
+            </Button>
           </div>
+        </div>
+      </div>
+      <div className="col-start-2 row-start-2 col-span-11">
+        <div className="space-y-2">
           <h1
-            className="font-medium pointer py-4"
+            className="font-medium pointer"
             onClick={() => navigate(`/${user?.username}/post/${post._id}/`)}
           >
             {post.text}
           </h1>
           {post.img && (
             <div
-              className="rounded-md overflow-hidden border-[1px] border-solid border-gray-300"
+              className="rounded-md overflow-hidden border-[1px] mr-4 border-solid border-gray-300"
               onClick={() => navigate(`/${user?.username}/post/${post._id}/`)}
             >
               <img src={post.img} alt={"image-missing"} />

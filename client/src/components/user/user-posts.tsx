@@ -24,7 +24,7 @@ export default function UserPosts() {
   }
 
   return (
-    <section>
+    <section className="rounded-t-2xl overflow-hidden">
       {posts && posts?.map((post) => <Post post={post} key={post._id} />)}
     </section>
   );

@@ -1,21 +1,28 @@
-import SiteHeader from "@/components/site/site-header";
+import SiteSidebar from "@/components/site/site-sidebar";
+import { UserDataType } from "@/services/types";
+import { useQuery } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const { pathname } = useLocation();
+  const { data: authUser } = useQuery<UserDataType>({
+    queryKey: ["verify-user"],
+  });
   return (
-    <section className="relative w-full">
-      <div
+    <section className="flex w-full">
+      {authUser && <SiteSidebar />}
+      <main
         className={
           pathname === "/"
-            ? "container sm:max-w-2xl mx-auto md:max-w-4xl"
-            : "max-w-2xl mx-auto"
+            ? "container mx-auto"
+            : pathname === "/auth"
+            ? ""
+            : "max-w-4xl mx-auto"
         }
       >
-        <SiteHeader />
-        <main>{children}</main>
-      </div>
+        {children}
+      </main>
     </section>
   );
 }

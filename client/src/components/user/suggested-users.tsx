@@ -12,7 +12,7 @@ export default function SuggestedUsers() {
   return (
     <section>
       <h1 className="mb-4 font-bold">SuggestedUsers</h1>
-      <div className="flex flex-col gap-4">
+      <div>
         {suggestedUsers?.map((user) => (
           <SuggestedUser key={user._id} user={user} />
         ))}

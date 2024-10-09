@@ -43,10 +43,10 @@ export default function PostPage() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex mt-10">
         <div className="flex w-full items-center gap-3">
           <Avatar>
-            <AvatarImage src={user?.profilePic} />
+            <AvatarImage src={user?.profilePicture} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="flex items-center">

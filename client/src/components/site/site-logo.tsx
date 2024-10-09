@@ -1,15 +1,17 @@
 import useTheme from "@/hooks/useTheme";
+import { Link } from "react-router-dom";
 
 export default function SiteLogo() {
-  const { setTheme, theme } = useTheme();
+  const { theme } = useTheme();
   return (
     <section>
-      <img
-        src={theme === "dark" ? "/light-logo.svg" : "/dark-logo.svg"}
-        className="w-6 cursor-pointer"
-        alt="threads.net"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      />
+      <Link to="/">
+        <img
+          src={theme === "dark" ? "/light-logo.svg" : "/dark-logo.svg"}
+          className="w-8 h-8 cursor-pointer"
+          alt="threads.net"
+        />
+      </Link>
     </section>
   );
 }

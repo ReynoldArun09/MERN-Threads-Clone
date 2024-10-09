@@ -29,9 +29,13 @@ export function DeletePostMutation() {
 }
 
 export function ReplyToPostMutation(postId: string) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["reply-post"],
     mutationFn: (replyText: string) => ReplyPostApi(postId, replyText),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["user-posts"] });
+    },
   });
 }
 

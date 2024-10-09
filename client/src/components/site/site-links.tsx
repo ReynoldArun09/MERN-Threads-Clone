@@ -37,7 +37,7 @@ export default function SiteLinks({ username }: { username: string }) {
   ];
 
   return (
-    <section className="flex items-center gap-4">
+    <section className="flex flex-col items-center gap-10">
       {sitelinks.map((link) => (
         <Link to={link.path ? link.path : "#"} key={link.name}>
           <TooltipWrapper content={link.name}>{link.icon}</TooltipWrapper>

@@ -1,15 +1,19 @@
 import FeedPosts from "@/components/post/feed-posts";
+import SiteHeader from "@/components/site/site-header";
 import SuggestedUsers from "@/components/user/suggested-users";
 
 export default function HomePage() {
   return (
-    <section className="flex items-start gap-20">
-      <div className="basis-[75%]">
-        <FeedPosts />
-      </div>
-      <div className="basis-1/4 hidden md:block">
-        <SuggestedUsers />
-      </div>
-    </section>
+    <>
+      <SiteHeader />
+      <section className="flex">
+        <div className="flex flex-1 justify-center items-center">
+          <FeedPosts />
+        </div>
+        <div>
+          <SuggestedUsers />
+        </div>
+      </section>
+    </>
   );
 }

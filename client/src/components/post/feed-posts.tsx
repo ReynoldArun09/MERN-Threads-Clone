@@ -33,7 +33,7 @@ export default function FeedPosts() {
   }
 
   return (
-    <section className="px-4">
+    <section className="rounded-2xl overflow-hidden">
       {data?.pages.map((page, pageIndex) => (
         <div key={pageIndex}>
           {page.data.map((post) => (
