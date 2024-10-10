@@ -17,11 +17,13 @@ export const GetUserProfileApi = AsyncHandler(
     if (mongoose.Types.ObjectId.isValid(query)) {
       user = await User.findOne({ _id: query })
         .select("-password")
-        .select("-updatedAt");
+        .select("-updatedAt")
+        .exec();
     } else {
       user = await User.findOne({ username: query })
         .select("-password")
-        .select("-updatedAt");
+        .select("-updatedAt")
+        .exec();
     }
 
     if (!user) {
