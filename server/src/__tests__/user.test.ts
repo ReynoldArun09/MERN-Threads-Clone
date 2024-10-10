@@ -65,15 +65,13 @@ describe("freeze account", () => {
 
     const mockToken = jwt.sign(
       { id: new mongoose.Types.ObjectId() },
-      process.env.JWT_SECRET_KEY,
+      "randomsecretkey",
       { expiresIn: "1h" }
     );
 
     const response = await request(app)
       .put("/api/v1/user/freeze")
       .set("Cookie", `treads=${mockToken}`);
-
-    console.log(response.body);
 
     expect(response.status).toBe(400);
     expect(response.body.message).toBe(ErrorMessages.USER_NOT_FOUND);
@@ -85,7 +83,7 @@ describe("freeze account", () => {
     (User.updateOne as jest.Mock).mockResolvedValueOnce({ modifiedCount: 1 });
     const mockToken = jwt.sign(
       { id: new mongoose.Types.ObjectId() },
-      process.env.JWT_SECRET_KEY,
+      "randomsecretkey",
       { expiresIn: "1h" }
     );
 
