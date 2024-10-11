@@ -42,7 +42,7 @@ export type PostResponseType = {
 
 export type PostSchemaExtendedType = {
   text: string;
-  image?: string;
+  img?: string;
   postedById: string;
 };
 

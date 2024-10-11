@@ -7,7 +7,9 @@ export default function AuthPage() {
   return (
     <section className="h-screen m-auto flex items-center justify-center border-2 w-screen relative">
       <img src="/threads.png" alt="" className="absolute top-0" />
-      {authState === "sign-in" ? <SignIn /> : <SignUp />}
+      <div className="z-10">
+        {authState === "sign-in" ? <SignIn /> : <SignUp />}
+      </div>
     </section>
   );
 }

@@ -23,6 +23,6 @@ jobs:
 
       - name: install dependencies
         run: |
-          cd server
+          cd client
           npm ci
           npm run test
